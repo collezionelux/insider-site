@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>INSIDER Method&trade; &mdash; Strategic Intelligence</title>
+<meta name="robots" content="noindex,nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink-void: #0A0A0B;
+    --ink-graphite: #131316;
+    --ink-smoke: #1E1E22;
+    --ink-steel: #2A2A2F;
+    --text-ivory: #F2EFE7;
+    --text-bone: #D4D0C4;
+    --text-archive: #8C887D;
+    --text-mute: #56544D;
+    --brass: #A88A4A;
+    --brass-bright: #C9A55C;
+    --vermilion: #B23A2A;
+    --success: #4A7C59;
+    --font-editorial: 'Cormorant Garamond', Georgia, serif;
+    --font-institutional: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1.0);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink-void);
+    color: var(--text-ivory);
+    font-family: var(--font-institutional);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .grain {
+    position: fixed; inset: 0; z-index: 1;
+    pointer-events: none; opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--ink-graphite);
+    color: var(--brass);
+    padding: 10px 24px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: 0.5px solid var(--ink-steel);
+  }
+  .topbar strong { color: var(--text-ivory); }
+  .topbar .pulse { display: inline-block; width: 8px; height: 8px; background: var(--brass); border-radius: 50%; margin-right: 8px; animation: blink 1.5s infinite; vertical-align: middle; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  /* HEADER */
+  header {
+    padding: 24px 40px;
+    text-align: center;
+    border-bottom: 0.5px solid var(--ink-steel);
+  }
+  .wordmark {
+    font-family: var(--font-editorial);
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: var(--text-ivory);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .wordmark sup { font-size: 11px; color: var(--text-archive); margin-left: 2px; }
+
+  /* CONTAINER */
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 56px 40px 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* VSL HEADER */
+  .vsl-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .vsl-eyebrow {
+    display: inline-block;
+    padding: 8px 24px;
+    border: 0.5px solid var(--brass);
+    color: var(--brass);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .vsl-header h1 {
+    font-family: var(--font-editorial);
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.08;
+    color: var(--text-ivory);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .vsl-header h1 em { color: var(--brass); font-style: italic; }
+  .vsl-header p {
+    font-family: var(--font-editorial);
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--text-bone);
+    font-style: italic;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* VIDEO PLAYER */
+  .video-wrap {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: var(--ink-smoke);
+    border: 0.5px solid var(--brass);
+    margin-bottom: 32px;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(168, 138, 74, 0.18);
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* INSTRUCTION BANNER */
+  .video-instruction {
+    text-align: center;
+    padding: 16px 24px;
+    background: var(--ink-graphite);
+    border: 0.5px solid var(--brass);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .video-instruction .live {
+    color: var(--brass);
+    animation: blink 1.5s infinite;
+    margin-right: 6px;
+  }
+
+  /* BUY SECTION */
+  .buy-section {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 1.4s var(--ease), max-height 1s var(--ease);
+  }
+  .buy-section.revealed {
+    opacity: 1;
+    max-height: 99999px;
+  }
+
+  .waiting-box {
+    text-align: center;
+    padding: 64px 32px;
+    background: var(--ink-graphite);
+    border: 0.5px dashed var(--ink-steel);
+    margin: 64px 0;
+  }
+  .waiting-box-icon {
+    font-family: var(--font-editorial);
+    font-size: 56px;
+    color: var(--brass);
+    margin-bottom: 24px;
+    line-height: 1;
+  }
+  .waiting-box h3 {
+    font-family: var(--font-editorial);
+    font-size: 28px;
+    color: var(--text-ivory);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .waiting-box p {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--text-bone);
+    max-width: 580px;
+    margin: 0 auto 24px;
+  }
+  .waiting-progress {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-archive);
+  }
+  .waiting-progress #waitTimer {
+    color: var(--brass);
+    font-weight: 700;
+  }
+
+  /* SECTION */
+  .section {
+    margin-top: 80px;
+    padding-top: 80px;
+    border-top: 0.5px solid var(--ink-steel);
+  }
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .section h2 {
+    font-family: var(--font-editorial);
+    font-size: clamp(32px, 4.2vw, 48px);
+    line-height: 1.12;
+    color: var(--text-ivory);
+    letter-spacing: -0.018em;
+    margin-bottom: 32px;
+    text-align: center;
+    font-weight: 500;
+  }
+  .section h2 em { color: var(--brass); font-style: italic; }
+  .section .lead {
+    font-family: var(--font-editorial);
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--text-bone);
+    text-align: center;
+    margin-bottom: 56px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+  }
+
+  /* MEGA CTA */
+  .mega-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 72px;
+    background: var(--brass);
+    color: var(--ink-void);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-weight: 700;
+    transition: all 0.4s var(--ease);
+    box-shadow: 0 0 0 1px var(--brass), 0 0 60px rgba(168, 138, 74, 0.4);
+  }
+  .mega-cta:hover {
+    background: var(--brass-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px var(--brass-bright), 0 16px 64px rgba(168, 138, 74, 0.6);
+  }
+  .mega-cta .arrow { transition: transform 0.4s var(--ease); }
+  .mega-cta:hover .arrow { transform: translateX(8px); }
+  .cta-wrap { text-align: center; margin: 56px 0; }
+
+  /* OFFER BOX */
+  .offer-box {
+    padding: 64px 48px;
+    border: 1px solid var(--brass);
+    background: linear-gradient(135deg, var(--ink-graphite), var(--ink-smoke));
+    text-align: center;
+    margin: 64px 0;
+    position: relative;
+    box-shadow: 0 0 80px rgba(168, 138, 74, 0.12);
+  }
+  .offer-box::before {
+    content: '★ INSIDER METHOD™ · COHORT III';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--brass);
+    color: var(--ink-void);
+    padding: 6px 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .offer-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .offer-title {
+    font-family: var(--font-editorial);
+    font-size: 36px;
+    color: var(--text-ivory);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .offer-title em { color: var(--brass); font-style: italic; }
+  .offer-meta {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text-bone);
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .price-row {
+    margin: 32px 0;
+  }
+  .price-old {
+    font-family: var(--font-editorial);
+    font-size: 28px;
+    color: var(--text-archive);
+    text-decoration: line-through;
+    margin-bottom: 8px;
+  }
+  .price-new {
+    font-family: var(--font-editorial);
+    font-size: clamp(56px, 10vw, 96px);
+    color: var(--brass);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .price-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--brass);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .price-terms {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    margin: 24px 0 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-archive);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .price-terms span::before { content: '· '; color: var(--brass); }
+  .price-terms span:first-child::before { content: ''; }
+
+  /* BENEFITS */
+  .benefits {
+    max-width: 700px;
+    margin: 56px auto;
+  }
+  .benefit-row {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 0.5px solid var(--ink-steel);
+  }
+  .benefit-row:last-child { border-bottom: none; }
+  .benefit-row .check {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border: 0.5px solid var(--brass);
+    color: var(--brass);
+    font-family: var(--font-editorial);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .benefit-row h4 {
+    font-family: var(--font-editorial);
+    font-size: 22px;
+    color: var(--text-ivory);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .benefit-row p {
+    font-family: var(--font-editorial);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-bone);
+  }
+
+  /* GUARANTEE */
+  .guarantee {
+    padding: 48px;
+    border: 0.5px solid var(--brass);
+    background: var(--ink-graphite);
+    margin: 64px 0;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  .guarantee-seal {
+    width: 140px; height: 140px;
+    border: 1px solid var(--brass);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: var(--font-editorial);
+    color: var(--brass);
+  }
+  .guarantee-seal .num {
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 400;
+  }
+  .guarantee-seal .label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    color: var(--text-bone);
+    text-align: center;
+    line-height: 1.4;
+  }
+  .guarantee-text h3 {
+    font-family: var(--font-editorial);
+    font-size: 28px;
+    color: var(--text-ivory);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .guarantee-text p {
+    font-family: var(--font-editorial);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-bone);
+    font-style: italic;
+  }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 0.5px solid var(--ink-steel);
+    padding: 24px 0;
+  }
+  .faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-editorial);
+    font-size: 19px;
+    color: var(--text-ivory);
+    padding: 8px 0;
+    font-weight: 500;
+    gap: 24px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    color: var(--brass);
+    font-size: 24px;
+    font-family: var(--font-mono);
+    transition: transform 0.4s;
+    flex-shrink: 0;
+  }
+  .faq-item[open] summary::after { content: '\2212'; }
+  .faq-item p {
+    font-family: var(--font-editorial);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-bone);
+    padding-top: 16px;
+    padding-bottom: 8px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px 40px;
+    border-top: 0.5px solid var(--ink-steel);
+    text-align: center;
+    background: var(--ink-graphite);
+  }
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    line-height: 2;
+  }
+  footer a { color: var(--text-archive); text-decoration: none; }
+  .footer-disclaimer {
+    font-family: var(--font-institutional);
+    font-size: 11px;
+    color: var(--text-mute);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 24px auto 0;
+    text-align: left;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 40px 20px 80px; }
+    .guarantee { flex-direction: column; gap: 24px; text-align: center; padding: 32px; }
+    .offer-box { padding: 40px 24px; }
+    .mega-cta { padding: 22px 40px; font-size: 13px; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<div class="topbar">
+  <span class="pulse"></span> INSIDER METHOD&trade; &middot; STRATEGIC INTELLIGENCE &middot; <strong>MMXXVI</strong>
+</div>
+
+<header>
+  <a href="index.html" class="wordmark">INSIDER<sup>&trade;</sup></a>
+</header>
+
+<div class="container">
+
+  <!-- VSL HEADER -->
+  <div class="vsl-header">
+    <div class="vsl-eyebrow">&mdash; Sessione Riservata &middot; Insider Method&trade;</div>
+    <h1>Il sistema decisionale<br/>che <em>protegge il capitale</em>.</h1>
+    <p>Mantieni l'audio acceso. Quello che stai per vedere ti far&agrave; guardare il mercato del collezionismo in un modo che non potrai pi&ugrave; disfare.</p>
+  </div>
+
+  <!-- VIDEO YOUTUBE EMBED -->
+  <div class="video-wrap">
+    <iframe 
+      id="vslVideo"
+      src="https://www.youtube-nocookie.com/embed/7snrZcWidto?rel=0&modestbranding=1&controls=1&showinfo=0&iv_load_policy=3&playsinline=1"
+      title="INSIDER Method - VSL"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="video-instruction">
+    <span class="live">&bull; LIVE</span> Mantieni l'audio acceso &middot; Guarda fino alla fine &middot; Si rivela qualcosa al minuto 8
+  </div>
+
+  <!-- WAITING BOX (visible until reveal) -->
+  <div class="waiting-box" id="waitingBox">
+    <div class="waiting-box-icon">&#8943;</div>
+    <h3>Continua a guardare il video.</h3>
+    <p>Il pulsante di accesso al programma si rivela al termine della sessione. Questo non &egrave; un trucco di marketing &mdash; &egrave; che voglio essere sicuro che tu abbia ricevuto tutto il contesto prima di decidere.</p>
+    <div class="waiting-progress">Il pulsante apparir&agrave; tra <span id="waitTimer">--:--</span></div>
+  </div>
+
+  <!-- BUY SECTION (revealed after delay) -->
+  <div class="buy-section" id="buySection">
+
+    <div class="section">
+      <div class="section-eyebrow">&mdash; Adesso che hai il quadro completo</div>
+      <h2>Entra nell'<em>Insider Method&trade;</em>.<br/>Tutto il sistema. Accesso immediato.</h2>
+      <p class="lead">Settanta lezioni video. Sette moduli strutturati. Tutto quello che ho costruito in trent'anni di mercato concreto, distillato in un percorso completo che puoi iniziare oggi stesso.</p>
+
+      <div class="benefits">
+        <div class="benefit-row">
+          <div class="check">&check;</div>
+          <div>
+            <h4>70 lezioni video in 7 moduli</h4>
+            <p>Dalla lettura strutturale dell&apos;assorbimento all&apos;analisi del rischio documentale. Dalla psicologia del venditore alla costruzione della liquidit&agrave; futura. Dal posizionamento dealer all&apos;analisi delle incoerenze nelle provenienze.</p>
+          </div>
+        </div>
+        <div class="benefit-row">
+          <div class="check">&check;</div>
+          <div>
+            <h4>Accesso immediato &middot; A vita</h4>
+            <p>Appena confermi l&apos;acquisto, ricevi le credenziali per accedere a tutte le settanta lezioni. Le segui nell&apos;ordine che preferisci. Le riguardi quante volte vuoi. Restano tue per sempre.</p>
+          </div>
+        </div>
+        <div class="benefit-row">
+          <div class="check">&check;</div>
+          <div>
+            <h4>Framework operativi reali</h4>
+            <p>Non sono concetti teorici. Sono strumenti applicabili che ho usato personalmente su centinaia di operazioni reali nel mercato dell&apos;arte, del design e del collezionismo italiano.</p>
+          </div>
+        </div>
+        <div class="benefit-row">
+          <div class="check">&check;</div>
+          <div>
+            <h4>Garanzia integrale 14 giorni</h4>
+            <p>Se entro due settimane non senti di aver ricevuto valore superiore all&apos;investimento, scrivi una mail e ti rimborsiamo integralmente. Senza domande, senza procedure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OFFER BOX -->
+    <div class="offer-box">
+      <div class="offer-label">&mdash; Accesso Insider Method&trade;</div>
+      <div class="offer-title">Il <em>sistema completo</em>.<br/>Accesso a vita.</div>
+      <div class="offer-meta">70 lezioni &middot; 7 moduli &middot; Garanzia 14 giorni &middot; Accesso immediato</div>
+      
+      <div class="price-row">
+        <div class="price-old">&euro;1.600</div>
+        <div class="price-new">&euro;1.000</div>
+        <div class="price-meta">Pagamento unico &middot; Nessun abbonamento</div>
+      </div>
+
+      <a href="#" class="mega-cta" onclick="goToCheckout(event)">
+        Accedi all'Insider Method
+        <span class="arrow">&rarr;</span>
+      </a>
+
+      <div class="price-terms">
+        <span>Accesso immediato</span>
+        <span>Garanzia 14 giorni</span>
+        <span>70 lezioni</span>
+        <span>Pagamento sicuro</span>
+      </div>
+    </div>
+
+    <!-- GUARANTEE -->
+    <div class="guarantee">
+      <div class="guarantee-seal">
+        <div class="num">14</div>
+        <div class="label">Day<br/>Filed<br/>Guarantee</div>
+      </div>
+      <div class="guarantee-text">
+        <h3>Garanzia integrale di quattordici giorni.</h3>
+        <p>Accedi a tutte le settanta lezioni. Studia il sistema. Applicalo. Se entro 14 giorni non senti di aver ricevuto valore superiore all&apos;investimento, scrivi una mail. Rimborso totale entro 5 giorni lavorativi. Nessuna domanda, nessuna procedura. Hai la mia parola.</p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+      <div class="section-eyebrow">&mdash; Domande frequenti</div>
+      <h2>Le risposte alle domande<br/>che riceviamo <em>pi&ugrave; spesso</em>.</h2>
+      
+      <div style="margin-top:48px;">
+        <details class="faq-item">
+          <summary>Come accedo alle 70 lezioni dopo l&apos;acquisto?</summary>
+          <p>Appena confermi il pagamento, ricevi un&apos;email con le credenziali di accesso alla piattaforma. Da quel momento puoi entrare e guardare tutte le lezioni quando vuoi, da qualsiasi dispositivo (computer, tablet, smartphone). L&apos;accesso &egrave; immediato e a vita.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Le lezioni sono in italiano?</summary>
+          <p>S&igrave;. Tutte le settanta lezioni sono in italiano. Sottotitoli professionali in inglese sono disponibili per chi opera con clientela internazionale.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Posso pagare a rate?</summary>
+          <p>S&igrave;. Il checkout supporta pagamento unico in carta o PayPal, e in alcuni paesi rateizzazione automatica (2-12 rate). Verifica le opzioni disponibili durante il checkout.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Per chi &egrave; davvero pensato l&apos;Insider Method&trade;?</summary>
+          <p>Per dealer, gallerists, antiquari, advisor di collezionisti, private collectors con portafoglio collezionistico significativo. Non &egrave; per principianti. Se non operi nel mercato collezionabile da almeno tre-cinque anni, probabilmente non avrai il contesto operativo per applicare i framework con efficacia immediata.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Come funziona la garanzia di 14 giorni?</summary>
+          <p>Accedi a tutto immediatamente. Studi il sistema. Lo applichi. Entro 14 giorni dall&apos;acquisto, se non sei soddisfatto, scrivi una mail. Rimborso totale entro 5 giorni lavorativi. Nessuna domanda, nessuna procedura complicata. La garanzia esiste per proteggere te, non per limitarci.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quanto tempo serve per completare il percorso?</summary>
+          <p>Dipende dal tuo ritmo. Ogni lezione dura tra 8 e 14 minuti. Alcuni studenti completano il percorso in 4-6 settimane (1-2 lezioni al giorno). Altri preferiscono dilatarlo su 3-4 mesi, applicando un modulo alla volta. Non c&apos;&egrave; un tempo giusto: l&apos;accesso a vita ti permette di seguire il tuo ritmo.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Riceveranno aggiornamenti i contenuti?</summary>
+          <p>S&igrave;. L&apos;Insider Method&trade; &egrave; un sistema vivo. Quando aggiungo nuove lezioni o aggiorno framework con nuovi casi reali, gli studenti gi&agrave; iscritti accedono automaticamente. Senza costi aggiuntivi.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div style="text-align:center;margin-top:80px;padding-top:80px;border-top:0.5px solid var(--ink-steel);">
+      <div class="section-eyebrow">&mdash; Ultima riflessione</div>
+      <h2 style="font-family:var(--font-editorial);font-size:clamp(36px,5vw,52px);line-height:1.1;color:var(--text-ivory);margin-bottom:32px;letter-spacing:-0.02em;font-weight:500;">Una decisione strutturata <em>oggi</em><br/>vale pi&ugrave; di dieci decisioni<br/>improvvisate domani.</h2>
+      <p style="font-family:var(--font-editorial);font-size:22px;line-height:1.5;color:var(--text-bone);margin-bottom:48px;font-style:italic;max-width:720px;margin-left:auto;margin-right:auto;">Se ritieni che una singola decisione futura possa valere decine o centinaia di migliaia di euro, allora vale la pena investire poche ore per installare il sistema che la proteger&agrave;.</p>
+      <a href="#" class="mega-cta" onclick="goToCheckout(event)">
+        Accedi all'Insider Method
+        <span class="arrow">&rarr;</span>
+      </a>
+      <div style="margin-top:32px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-mute);">
+        Accesso immediato &middot; Garanzia 14 giorni &middot; 70 lezioni &middot; Pagamento sicuro
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>INSIDER&trade; &middot; Strategic Intelligence &middot; MMXXVI &middot; Milano</p>
+  <p>
+    <a href="#">Privacy Policy</a> &middot;
+    <a href="#">Terms &amp; Conditions</a> &middot;
+    <a href="mailto:refund@insider-method.com">Refund</a>
+  </p>
+  <div class="footer-disclaimer">
+    I risultati mostrati nelle testimonianze rappresentano esperienze concrete di operatori che hanno applicato i framework dell&apos;Insider Method&trade;. Ogni percorso &egrave; unico e i risultati dipendono da diversi fattori personali. L&apos;acquisto di un programma di formazione non costituisce promessa di guadagno n&eacute; garanzia di risultati specifici.
+  </div>
+</footer>
+
+<script>
+  // ============ REVEAL DELAY ============
+  // Video VSL dura 8:35 minuti
+  // Il pulsante compare a 6:00 minuti = quando la gente è dentro al pitch finale
+  // Per testing rapido: imposta a 30000 (30 secondi)
+  const REVEAL_DELAY_MS = 360000; // 6 minuti (360 secondi = 360000 ms)
+
+  let timerInterval;
+  
+  function startRevealTimer() {
+    const startTime = Date.now();
+    const targetTime = startTime + REVEAL_DELAY_MS;
+    
+    function updateTimer() {
+      const remaining = targetTime - Date.now();
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        revealBuySection();
+        return;
+      }
+      const minutes = Math.floor(remaining / 60000);
+      const seconds = Math.floor((remaining % 60000) / 1000);
+      const timerEl = document.getElementById('waitTimer');
+      if (timerEl) {
+        timerEl.textContent = String(minutes).padStart(2,'0') + ':' + String(seconds).padStart(2,'0');
+      }
+    }
+    
+    updateTimer();
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+  
+  function revealBuySection() {
+    document.getElementById('waitingBox').style.display = 'none';
+    document.getElementById('buySection').classList.add('revealed');
+    setTimeout(function() {
+      document.getElementById('buySection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 1000);
+  }
+  
+  // Inizia il timer subito al caricamento pagina
+  startRevealTimer();
+
+  // ============ CHECKOUT HOTMART ============
+  function goToCheckout(e) {
+    e.preventDefault();
+    // ⚠ SOSTITUISCI con il tuo link Hotmart quando lo avrai
+    const HOTMART_URL = 'https://pay.hotmart.com/YOUR-PRODUCT-ID';
+    
+    // Per ora: alert + tracking opzionale
+    alert('⟶ Qui andr&agrave; il link al checkout Hotmart\n\nQuando avrai il link reale, sostituiscilo nel codice (variabile HOTMART_URL).');
+    
+    // Quando hai il link Hotmart, commenta l'alert sopra e decommenta questa riga:
+    // window.location.href = HOTMART_URL;
+  }
+</script>
+
+</body>
+</html>
