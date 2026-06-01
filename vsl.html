@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Intelligence Reading — INSIDER Method™</title>
+<meta name="robots" content="noindex,nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink-void: #0A0A0B; --ink-graphite: #131316; --ink-smoke: #1E1E22;
+    --ink-steel: #2A2A2F; --text-ivory: #F2EFE7; --text-bone: #D4D0C4;
+    --text-archive: #8C887D; --text-mute: #56544D;
+    --brass: #A88A4A; --brass-bright: #C9A55C;
+    --font-editorial: 'Cormorant Garamond', Georgia, serif;
+    --font-institutional: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1.0);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--ink-void); color: var(--text-ivory); font-family: var(--font-institutional); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .grain { position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.04; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+  .topbar { background: var(--brass); color: var(--ink-void); padding: 10px 24px; text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
+  header { padding: 24px 40px; text-align: center; border-bottom: 0.5px solid var(--ink-steel); }
+  .wordmark { font-family: var(--font-editorial); font-size: 22px; letter-spacing: 0.08em; color: var(--text-ivory); text-decoration: none; font-weight: 500; }
+  .wordmark sup { font-size: 11px; color: var(--text-archive); margin-left: 2px; }
+  .container { max-width: 900px; margin: 0 auto; padding: 64px 40px 120px; position: relative; z-index: 2; }
+  .vsl-header { text-align: center; margin-bottom: 48px; }
+  .vsl-eyebrow { display: inline-block; padding: 8px 24px; border: 0.5px solid var(--brass); color: var(--brass); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 32px; }
+  .vsl-header h1 { font-family: var(--font-editorial); font-size: clamp(32px, 5vw, 56px); line-height: 1.08; color: var(--text-ivory); letter-spacing: -0.02em; margin-bottom: 24px; font-weight: 500; }
+  .vsl-header h1 em { color: var(--brass); font-style: italic; }
+  .vsl-header p { font-family: var(--font-editorial); font-size: 22px; line-height: 1.45; color: var(--text-bone); font-style: italic; max-width: 720px; margin: 0 auto; }
+  .video-wrap { position: relative; aspect-ratio: 16/9; background: var(--ink-smoke); border: 0.5px solid var(--brass); margin-bottom: 32px; overflow: hidden; box-shadow: 0 0 60px rgba(168, 138, 74, 0.15); }
+  .video-wrap::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--ink-graphite) 0%, #1a1812 50%, var(--ink-smoke) 100%); }
+  .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; z-index: 2; }
+  .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 3; transition: opacity 0.6s var(--ease); }
+  .play-overlay.hidden { opacity: 0; pointer-events: none; }
+  .play-btn-big { width: 120px; height: 120px; border-radius: 50%; border: 1px solid var(--brass); background: rgba(10,10,11,0.7); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; transition: all 0.6s var(--ease); animation: pulse 2.4s ease-in-out infinite; }
+  .play-btn-big:hover { transform: scale(1.1); background: var(--brass); }
+  .play-btn-big::before { content: ''; width: 0; height: 0; border-top: 18px solid transparent; border-bottom: 18px solid transparent; border-left: 28px solid var(--text-ivory); margin-left: 8px; }
+  .play-btn-big:hover::before { border-left-color: var(--ink-void); }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(168, 138, 74, 0.5); } 50% { box-shadow: 0 0 0 30px rgba(168, 138, 74, 0); } }
+  .video-meta-overlay { position: absolute; bottom: 20px; left: 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-ivory); z-index: 4; background: rgba(10,10,11,0.8); padding: 6px 14px; border: 0.5px solid var(--brass); }
+  .watching-note { text-align: center; padding: 16px 24px; background: var(--ink-graphite); border: 0.5px solid var(--ink-steel); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-archive); margin-bottom: 80px; }
+  .watching-note .live { color: var(--brass); animation: blink 2s infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .buy-section { opacity: 0; max-height: 0; overflow: hidden; transition: opacity 1.2s var(--ease), max-height 0.8s var(--ease); }
+  .buy-section.revealed { opacity: 1; max-height: 99999px; }
+  .section { margin-top: 80px; padding-top: 80px; border-top: 0.5px solid var(--ink-steel); }
+  .section-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--brass); margin-bottom: 24px; text-align: center; }
+  .section h2 { font-family: var(--font-editorial); font-size: clamp(32px, 4.2vw, 48px); line-height: 1.12; color: var(--text-ivory); letter-spacing: -0.018em; margin-bottom: 32px; text-align: center; font-weight: 500; }
+  .section h2 em { color: var(--brass); font-style: italic; }
+  .section .lead { font-family: var(--font-editorial); font-size: 20px; line-height: 1.55; color: var(--text-bone); text-align: center; margin-bottom: 56px; max-width: 700px; margin-left: auto; margin-right: auto; font-style: italic; }
+  .mega-cta { display: inline-flex; align-items: center; gap: 24px; padding: 26px 64px; background: var(--brass); color: var(--ink-void); font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; font-weight: 700; transition: all 0.4s var(--ease); box-shadow: 0 0 0 1px var(--brass), 0 0 40px rgba(168, 138, 74, 0.3); }
+  .mega-cta:hover { background: var(--brass-bright); transform: translateY(-2px); }
+  .mega-cta .arrow { transition: transform 0.4s var(--ease); }
+  .mega-cta:hover .arrow { transform: translateX(8px); }
+  .cta-wrap { text-align: center; margin: 48px 0; }
+  .price-box { padding: 56px 40px; border: 1px solid var(--brass); background: linear-gradient(135deg, var(--ink-graphite), var(--ink-smoke)); text-align: center; margin: 56px 0; position: relative; box-shadow: 0 0 60px rgba(168, 138, 74, 0.1); }
+  .price-box::before { content: '★ COHORT III · MMXXVI'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--brass); color: var(--ink-void); padding: 6px 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; font-weight: 700; }
+  .total-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-mute); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px; }
+  .old-price { font-family: var(--font-editorial); font-size: 36px; color: var(--text-archive); text-decoration: line-through; margin-bottom: 8px; font-weight: 400; }
+  .save-label { font-family: var(--font-mono); font-size: 11px; color: var(--brass); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 24px; }
+  .new-price { font-family: var(--font-editorial); font-size: clamp(72px, 12vw, 120px); color: var(--brass); line-height: 1; letter-spacing: -0.04em; margin-bottom: 24px; font-weight: 400; }
+  .price-terms { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 24px 0 32px; font-family: var(--font-mono); font-size: 11px; color: var(--text-archive); letter-spacing: 0.18em; text-transform: uppercase; }
+  .price-terms span::before { content: '· '; color: var(--brass); }
+  .price-terms span:first-child::before { content: ''; }
+  .benefits { max-width: 680px; margin: 56px auto; }
+  .benefit-row { display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 0.5px solid var(--ink-steel); }
+  .benefit-row:last-child { border-bottom: none; }
+  .benefit-row .check { flex-shrink: 0; width: 32px; height: 32px; border: 0.5px solid var(--brass); color: var(--brass); font-family: var(--font-editorial); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .benefit-row h4 { font-family: var(--font-editorial); font-size: 20px; color: var(--text-ivory); margin-bottom: 4px; font-weight: 500; }
+  .benefit-row .val { font-family: var(--font-mono); font-size: 10px; color: var(--brass); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 6px; }
+  .benefit-row p { font-family: var(--font-editorial); font-size: 15px; line-height: 1.6; color: var(--text-bone); }
+  .guarantee { padding: 48px; border: 0.5px solid var(--brass); background: var(--ink-graphite); text-align: center; margin: 56px 0; display: flex; gap: 32px; align-items: center; }
+  .guarantee-seal { width: 140px; height: 140px; border: 1px solid var(--brass); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-editorial); color: var(--brass); }
+  .guarantee-seal .num { font-size: 42px; line-height: 1; font-weight: 400; }
+  .guarantee-seal .label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; margin-top: 6px; color: var(--text-bone); }
+  .guarantee-text { text-align: left; }
+  .guarantee-text h3 { font-family: var(--font-editorial); font-size: 26px; color: var(--text-ivory); margin-bottom: 12px; font-weight: 500; }
+  .guarantee-text p { font-family: var(--font-editorial); font-size: 16px; line-height: 1.6; color: var(--text-bone); font-style: italic; }
+  .testimonial { padding: 40px; border-left: 2px solid var(--brass); background: var(--ink-graphite); margin: 32px 0; }
+  .testimonial blockquote { font-family: var(--font-editorial); font-style: italic; font-size: 19px; line-height: 1.55; color: var(--text-ivory); margin-bottom: 20px; }
+  .testimonial .attribution { display: flex; align-items: center; gap: 16px; }
+  .testimonial .avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--brass), #6a5530); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--ink-void); font-family: var(--font-editorial); font-size: 18px; font-weight: 600; }
+  .testimonial .who { font-family: var(--font-institutional); font-size: 14px; color: var(--text-ivory); font-weight: 500; }
+  .testimonial .role { font-family: var(--font-mono); font-size: 10px; color: var(--text-archive); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 2px; }
+  .faq-item { border-bottom: 0.5px solid var(--ink-steel); padding: 24px 0; }
+  .faq-item summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-editorial); font-size: 19px; color: var(--text-ivory); padding: 8px 0; font-weight: 500; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; color: var(--brass); font-size: 24px; font-family: var(--font-mono); transition: transform 0.4s; }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item p { font-family: var(--font-editorial); font-size: 16px; line-height: 1.65; color: var(--text-bone); padding-top: 16px; padding-bottom: 8px; }
+  .urgency-block { background: linear-gradient(135deg, #2a1a1a, var(--ink-graphite)); border: 0.5px solid var(--brass); padding: 40px; text-align: center; margin: 56px 0; }
+  .urgency-block .icon { font-family: var(--font-editorial); color: var(--brass); font-size: 32px; margin-bottom: 16px; }
+  .urgency-block h3 { font-family: var(--font-editorial); font-size: 26px; color: var(--text-ivory); margin-bottom: 12px; font-weight: 500; }
+  .urgency-block p { font-family: var(--font-editorial); font-size: 17px; line-height: 1.55; color: var(--text-bone); margin-bottom: 24px; font-style: italic; }
+  .seats-tracker { font-family: var(--font-mono); font-size: 13px; color: var(--brass); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; }
+  footer { padding: 48px 40px; border-top: 0.5px solid var(--ink-steel); text-align: center; }
+  footer p { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-mute); line-height: 2; }
+  @media (max-width: 768px) {
+    .container { padding: 40px 20px 80px; }
+    .guarantee { flex-direction: column; gap: 24px; text-align: center; padding: 32px; }
+    .guarantee-text { text-align: center; }
+    .urgency-block, .price-box { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<div class="topbar">
+  ⚠ Cohort III · MMXXVI · <strong>83/100 seats remaining</strong> · Closes Friday
+</div>
+
+<header>
+  <a href="index.html" class="wordmark">INSIDER<sup>™</sup></a>
+</header>
+
+<div class="container">
+
+  <div class="vsl-header">
+    <div class="vsl-eyebrow">— Intelligence Reading N° 01 · 6 Min</div>
+    <h1>The Anatomy of<br/><em>Narrative Liquidity</em>.</h1>
+    <p>Press play. Mantieni l'audio acceso. Quello che stai per vedere ti farà guardare il mercato collezionabile in un modo che non potrai più disfare.</p>
+  </div>
+
+  <div class="video-wrap" id="videoWrap">
+    <!-- ⚠ SOSTITUISCI QUESTO PLACEHOLDER CON IL TUO IFRAME VIMEO O YOUTUBE -->
+    <!-- VIMEO ESEMPIO: <iframe src="https://player.vimeo.com/video/IDVIDEO?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
+    <!-- YOUTUBE ESEMPIO: <iframe src="https://www.youtube.com/embed/IDVIDEO?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
+    
+    <div class="play-overlay" id="playOverlay" onclick="startVideo()">
+      <div class="play-btn-big"></div>
+    </div>
+    <div class="video-meta-overlay">N° 01 · 6 MIN INTELLIGENCE READING</div>
+  </div>
+
+  <div class="watching-note">
+    <span class="live">● LIVE</span> &nbsp; 47 dealers watching now &nbsp; · &nbsp; 2,847 totali questa settimana
+  </div>
+
+  <div class="buy-section" id="buySection">
+
+    <div class="section">
+      <div class="section-eyebrow">— Hai appena visto solo l'1.4% del Method™</div>
+      <h2>Quello che hai appena visto è <em>una</em><br/>delle 70 Intelligence Readings.</h2>
+      <p class="lead">
+        L'intero Method™ è costruito per portarti dal "sapere qualcosa"<br/>
+        al "leggere il mercato prima di chiunque altro nel tuo settore".
+      </p>
+
+      <div class="benefits">
+        <div class="benefit-row">
+          <div class="check">✓</div>
+          <div>
+            <div class="val">€1,400 VALUE</div>
+            <h4>70 Intelligence Readings · 7 Moduli</h4>
+            <p>Video cinematografici da 8-14 minuti. Lifetime access. Italiano + sottotitoli inglese. I sette moduli coprono ogni angolo del mercato collezionabile: Narrative Liquidity, Auction Theatre, Perception Engineering, Inventory Risk, Contextual Value, Institutional Aura, Invisible Market Dynamics.</p>
+          </div>
+        </div>
+        <div class="benefit-row">
+          <div class="check">★</div>
+          <div>
+            <div class="val">€3,000 VALUE · BONUS EXCLUSIVE</div>
+            <h4>AI Strategic Advisor — 12 mesi inclusi</h4>
+            <p>Un'AI addestrata sull'intero Method™. Disponibile 24/7. Sa più di qualsiasi expert perché ha letto tutto e non dimentica nulla. Le chiedi: <em>"Devo uscire dal design italiano anni '80?"</em> e ti risponde con la lettura strutturale di assorbimento + narrative phase + azione consigliata.</p>
+          </div>
+        </div>
+        <div class="benefit-row">
+          <div class="check">✓</div>
+          <div>
+            <div class="val">€500 VALUE</div>
+            <h4>Annual Intelligence Report · 2026</h4>
+            <p>Report di 40 pagine sui trend strutturali del mercato per il 2026. Quale categoria sta crescendo, quale è in narrative collapse, dove si sta spostando il capitale collezionistico.</p>
+          </div>
+        </div>
+        <div class="benefit-row">
+          <div class="check">✓</div>
+          <div>
+            <div class="val">€600 VALUE</div>
+            <h4>Private Sunday Dispatch™ — 12 mesi</h4>
+            <p>Newsletter privata domenicale solo per membri. Letture di mercato che non escono pubblicamente. Solo per chi è dentro Cohort III.</p>
+          </div>
+        </div>
+        <div class="benefit-row">
+          <div class="check">✓</div>
+          <div>
+            <div class="val">€1,500 VALUE</div>
+            <h4>Audit Priority Slot Application</h4>
+            <p>Priorità nell'applicazione per Narrative Risk Audit privata (€2.500 standalone). Solo 12 audit all'anno disponibili.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-box">
+      <div class="total-label">Total Package Value</div>
+      <div class="old-price">€7,000</div>
+      <div class="save-label">⟶ Cohort III Investment</div>
+      <div class="new-price">€1,000</div>
+      <div style="font-family:var(--font-editorial);font-style:italic;font-size:18px;color:var(--text-bone);margin-bottom:8px;">Risparmi €6,000.</div>
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--brass);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:32px;">Pagamento unico · No abbonamenti · No tier</div>
+      <a href="#" class="mega-cta" onclick="goToCheckout(event)">Enter the Method ⟶ €1,000</a>
+      <div class="price-terms">
+        <span>Lifetime Access</span>
+        <span>14-Day Guarantee</span>
+        <span>Cohort III</span>
+        <span>100 Seats Max</span>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="guarantee-seal">
+        <div class="num">14</div>
+        <div class="label">Day<br/>Filed<br/>Guarantee</div>
+      </div>
+      <div class="guarantee-text">
+        <h3>Garanzia 14 giorni · Soddisfatti o filed out.</h3>
+        <p>Accedi al Method™. Guarda quanti video vuoi. Usa l'AI Advisor. Se entro 14 giorni non senti di aver ricevuto valore superiore a €1,000 — scrivi una mail. Rimborso totale. Nessuna domanda, nessuna procedura. Hai la mia parola.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">— Da chi è già dentro</div>
+      <h2>Quello che dicono i <em>dealer</em><br/>che hanno già letto.</h2>
+
+      <div class="testimonial">
+        <blockquote>"Pensavo di conoscere il mercato. Dopo i primi 12 readings ho capito che operavo su due livelli sopra la realtà. Ho riposizionato €180.000 di inventario in 6 settimane. Risparmiato almeno il triplo del prezzo del Method™."</blockquote>
+        <div class="attribution">
+          <div class="avatar">MR</div>
+          <div>
+            <div class="who">M. Rossi</div>
+            <div class="role">Galleria di design · Milano</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <blockquote>"L'AI Advisor è la cosa più sottovalutata del pacchetto. La uso ogni mattina prima di un'asta importante. Mi legge il lotto, mi dice cosa sta succedendo sotto. Da sola vale dieci volte il prezzo."</blockquote>
+        <div class="attribution">
+          <div class="avatar">GV</div>
+          <div>
+            <div class="who">G. Venturi</div>
+            <div class="role">Auction Specialist · Genova</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <blockquote>"Non è un corso. È un secondo cervello strutturale. Ho cambiato modo di acquistare in tre settimane. Adesso compro solo quando il narrative phase mi conferma."</blockquote>
+        <div class="attribution">
+          <div class="avatar">LB</div>
+          <div>
+            <div class="who">L. Bianchi</div>
+            <div class="role">Private Collector · Roma</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="urgency-block">
+      <div class="icon">⚠</div>
+      <h3>Cohort III chiude venerdì.</h3>
+      <p>Ogni cohort è chiuso a 100 membri per preservare la qualità dell'AI Advisor e del Private Dispatch. Cohort IV apre nel Q2 2026 — al prezzo standard di €1,800. <strong style="color:var(--text-ivory)">Il prezzo €1,000 esiste solo per Cohort III.</strong></p>
+      <div class="seats-tracker">⚠ 83 / 100 SEATS REMAINING</div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">— Domande frequenti</div>
+      <h2>Le risposte alle <em>tre</em><br/>domande che riceviamo sempre.</h2>
+
+      <div style="margin-top:48px;">
+        <details class="faq-item">
+          <summary>Per chi è davvero pensato il Method™?</summary>
+          <p>Per dealer di design e collezionismo, auction professionals, private collectors con inventario superiore a €100k, advisor di patrimoni. Non è per principianti. Se non operi nel mercato collezionabile da almeno 3-5 anni, probabilmente non avrai il contesto per applicare le letture.</p>
+        </details>
+        <details class="faq-item">
+          <summary>L'AI Advisor è davvero così avanzata?</summary>
+          <p>È addestrata sull'intero Method™, sui readings storici di mercato, su archivi di provenienza, e sui dati di assorbimento di Sotheby's, Phillips, Wright, Cambi degli ultimi 10 anni. Risponde in italiano. Non sostituisce un expert umano per autenticazione o appraisal — quello rimane lavoro di authority esterne. Ma per strategic reading e absorption analysis, supera qualsiasi consulente generico.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Cosa succede dopo Cohort III?</summary>
+          <p>Lifetime access al Method™ rimane garantito per sempre. AI Advisor incluso per 12 mesi dall'acquisto. Private Sunday Dispatch™ inclusa per 12 mesi. Dopo 12 mesi, opzione di rinnovo a €240/anno (no obbligo). I 70 readings rimangono tuoi per sempre.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Posso pagare in più rate?</summary>
+          <p>Hotmart supporta pagamento in carta singola, PayPal, e in alcuni paesi rateizzazione (2-12 rate). Verifica al checkout. Il prezzo €1,000 si applica a pagamento unico; per rateizzazione c'è un piccolo supplemento gestito da Hotmart.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Come funziona la garanzia 14 giorni?</summary>
+          <p>Accedi a tutto immediatamente dopo l'acquisto. Entro 14 giorni, se non sei soddisfatto, scrivi a <strong style="color:var(--brass)">refund@insider-method.com</strong> con la tua email d'acquisto. Rimborso totale entro 5 giorni lavorativi. Nessuna domanda.</p>
+        </details>
+        <details class="faq-item">
+          <summary>I video sono in italiano o inglese?</summary>
+          <p>Audio originale in italiano. Sottotitoli professionali in inglese disponibili per tutti i video. AI Advisor opera in italiano, inglese, francese e spagnolo.</p>
+        </details>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:80px;padding-top:80px;border-top:0.5px solid var(--ink-steel);">
+      <div class="section-eyebrow">— Una scelta. Due risultati.</div>
+      <h2 style="font-family:var(--font-editorial);font-size:clamp(36px,5vw,56px);line-height:1.1;color:var(--text-ivory);margin-bottom:32px;letter-spacing:-0.02em;font-weight:500;">Puoi continuare a leggere<br/>i risultati delle aste.<br/><em style="color:var(--brass);font-style:italic;">O puoi imparare a leggerle prima.</em></h2>
+      <p style="font-family:var(--font-editorial);font-size:22px;line-height:1.5;color:var(--text-bone);margin-bottom:48px;font-style:italic;">I tuoi competitor stanno già scegliendo. Tu?</p>
+      <a href="#" class="mega-cta" onclick="goToCheckout(event)">Enter the Method ⟶ €1,000</a>
+      <div style="margin-top:32px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);">⚠ Cohort III closes Friday · 83/100 seats remaining</div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>INSIDER™ · Strategic Intelligence · MMXXVI · Milano</p>
+</footer>
+
+<script>
+  // Reveal buy section after a delay (30s for demo, set to 360000 for 6 min in production)
+  const REVEAL_DELAY = 30000; // 30 seconds for testing — cambia a 360000 (6 min) per produzione
+  
+  setTimeout(function() {
+    document.getElementById('buySection').classList.add('revealed');
+    // Scroll suggestion after reveal
+    setTimeout(function() {
+      const buySection = document.getElementById('buySection');
+      buySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 800);
+  }, REVEAL_DELAY);
+
+  function startVideo() {
+    // Hide overlay
+    document.getElementById('playOverlay').classList.add('hidden');
+    
+    // ⚠ HERE: When you have your Vimeo/YouTube ID, replace this block with actual iframe
+    // For now, this just hides the play button
+    
+    const videoWrap = document.getElementById('videoWrap');
+    
+    // PLACEHOLDER: insert your video iframe here when ready
+    // Uncomment and edit when you have your video:
+    /*
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://player.vimeo.com/video/YOURIDHERE?autoplay=1';
+    iframe.allow = 'autoplay; fullscreen';
+    iframe.allowFullscreen = true;
+    videoWrap.appendChild(iframe);
+    */
+    
+    // For testing: reveal buy section immediately when play clicked
+    setTimeout(function() {
+      document.getElementById('buySection').classList.add('revealed');
+    }, 100);
+  }
+
+  function goToCheckout(e) {
+    e.preventDefault();
+    // ⚠ HERE: replace with your real Hotmart checkout link
+    const HOTMART_URL = 'https://pay.hotmart.com/YOUR-PRODUCT-ID';
+    
+    // For now, redirect to thank-you (testing flow)
+    window.location.href = 'thank-you.html';
+    
+    // When Hotmart link is ready, uncomment:
+    // window.open(HOTMART_URL, '_blank');
+  }
+</script>
+
+</body>
+</html>
